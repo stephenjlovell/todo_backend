@@ -3,14 +3,14 @@ require_relative 'boot'
 require "rails"
 # Pick the frameworks you want:
 require "active_model/railtie"
-require "active_job/railtie"
+# require "active_job/railtie"
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
-require "action_cable/engine"
+# require "action_cable/engine"
 # require "sprockets/railtie"
-require "rails/test_unit/railtie"
+# require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -27,15 +27,15 @@ module TodoBackend
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.generators do |g|
-      g.test_framework :rspec
-    end
-
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options]
+        resource '*', :headers => :any, :methods => [:get, :post, :patch, :put, :delete, :options]
       end
+    end
+
+    config.generators do |g|
+      g.test_framework :rspec
     end
 
   end

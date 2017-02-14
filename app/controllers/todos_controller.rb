@@ -4,13 +4,12 @@ class TodosController < ApplicationController
   # GET /todos
   def index
     @todos = Todo.all
-
-    render json: @todos
+    render 'todos/index.json.jbuilder'
   end
 
   # GET /todos/1
   def show
-    render json: @todo
+    render 'todos/show.json.jbuilder'
   end
 
   # POST /todos
@@ -18,7 +17,7 @@ class TodosController < ApplicationController
     @todo = Todo.new(todo_params)
 
     if @todo.save
-      render json: @todo, status: :created, location: @todo
+      render 'todos/show.json.jbuilder', status: :created
     else
       render json: @todo.errors, status: :unprocessable_entity
     end
@@ -27,7 +26,7 @@ class TodosController < ApplicationController
   # PATCH/PUT /todos/1
   def update
     if @todo.update(todo_params)
-      render json: @todo
+      render 'todos/show.json.jbuilder'
     else
       render json: @todo.errors, status: :unprocessable_entity
     end
@@ -39,7 +38,7 @@ class TodosController < ApplicationController
   end
 
   def destroy_all
-    @todo.destroy_all
+    Todo.delete_all
   end
 
   private

@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  # resources :todos
-  root 'todos#index'
 
-  post '/' => 'todos#create'
-  get '/:id' => 'todos#show'
-  patch '/:id' => 'todos#update'
-  delete '/:id' => 'todos#destroy'
+  # get '/' => 'todos#index'
+  # post '/' => 'todos#create'
+
+  #
+  #
+  # get '/:id' => 'todos#show', format: :json,
+  # put '/:id' => 'todos#update'
+  # delete '/:id' => 'todos#destroy'
+
+  resources :todos, path: '/'
 
   delete '/' => 'todos#destroy_all'
 
